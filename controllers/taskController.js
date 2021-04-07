@@ -75,6 +75,20 @@ class TaskController {
             console.log(err)
         })
     }
+
+    static getEditPage() {
+        Task.findByPk(+req.params.id)
+        .then((foundTodo) => {
+            if (foundTodo) {
+                res.status(200).json(foundTodo)
+            } else {
+                next({name: "not found"})
+            }
+        })
+        .catch((err) => {
+            next({message: err.message})
+        })
+    }
 }
 
 module.exports = TaskController

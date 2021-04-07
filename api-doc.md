@@ -14,6 +14,7 @@ And routes below need authentication
 And routes below needs authentication and authorization
 - `DELETE /tasks/:id`
 - `PUT /tasks/:id`
+- `GET /tasks/:id`
 
 ### POST /register
 
@@ -199,6 +200,39 @@ status: 500
 }
 ```
 
+### GET /tasks/:id
+
+description: 
+  to get into edited task by id
+
+Request: 
+
+- headers: access_token
+- params: 
+  - id: integer (required)
+
+  status: 200
+  body:
+  ```json
+  {
+    "task": "<task>"
+  }
+  ```
+
+  status: 404
+  ```json
+  {
+    "message": "task not found"
+  }
+  ```
+
+  status: 500
+  ```json
+  {
+    "message": "<error message || internal server error>"
+  }
+  ```
+
 ### DELETE /tasks/:id
 
 description: 
@@ -214,7 +248,6 @@ Response:
 
 - status: 200
 - body:
-
 ```json
 {
     "message": "succes delete task"

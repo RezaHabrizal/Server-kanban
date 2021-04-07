@@ -15,6 +15,7 @@ Router.post('/tasks', TaskController.create)
 
 Router.use('/tasks/:id', authorize)
 Router.delete('/tasks/:id', TaskController.delete)
+Router.get('/tasks/:id', TaskController.getEditPage)
 Router.put('/tasks/:id', TaskController.update)
 
 module.exports = Router
