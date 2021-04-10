@@ -4,7 +4,7 @@ function authorize(req, res, next) {
 
     Task.findByPk(+req.params.id)
     .then((foundTask) => {
-        console.log(req.loggedUser.id, "<<<<<<<<<<<<<<<<<")
+       
         if (foundTask) {
             if (foundTask.userId === req.loggedUser.id) {
                 next()
