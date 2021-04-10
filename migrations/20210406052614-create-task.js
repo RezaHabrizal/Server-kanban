@@ -28,9 +28,6 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      priority: {
-        type: Sequelize.STRING
-      },
       dueDate: {
         type: Sequelize.DATE
       },

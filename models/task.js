@@ -35,7 +35,6 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    priority: DataTypes.STRING,
     dueDate: {
       type: DataTypes.DATE,
       validate: {

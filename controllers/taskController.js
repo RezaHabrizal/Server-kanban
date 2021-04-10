@@ -1,9 +1,9 @@
-const {Task} = require('../models');
+const {Task, User} = require('../models');
 const util = require('util');
 
 class TaskController {
     static showAll(req, res, next) {
-        Task.findAll()
+        Task.findAll({include: User})
         .then((tasks) => {
             res.status(200).json({tasks})
         })
@@ -14,13 +14,12 @@ class TaskController {
 
     static create(req, res, next) {
         
-        const {title, description, category, priority, dueDate} = req.body
+        const {title, description, category, dueDate} = req.body
         
         Task.create({
             title,
             description,
             category,
-            priority,
             dueDate,
             userId: req.loggedUser.id
         })
@@ -56,11 +55,11 @@ class TaskController {
     }
 
     static update(req, res, next) {
-        const {title, description, category, priority, dueDate} = req.body
+        const {title, description, category, dueDate} = req.body
         Task.findByPk(+req.params.id)
         .then((foundTask) => {
 
-            return Task.update({title, description, category, priority, dueDate}, {
+            return Task.update({title, description, category, dueDate}, {
                 where: {
                     id: +req.params.id
                 },
@@ -77,7 +76,8 @@ class TaskController {
     }
 
     static getEditPage(req, res, next) {
-        Task.findByPk(+req.params.id)
+    
+        Task.findByPk(+req.params.id, {include: User})
         .then((foundTask) => {
             if (foundTask) {
                 res.status(200).json(foundTask)

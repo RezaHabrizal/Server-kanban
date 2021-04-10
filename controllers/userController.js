@@ -28,7 +28,7 @@ class UserController {
                 for (let key in err.fields) {
                     fields.push(err.fields[key])
                 }
-                next({name: err.name, message: `${fields} already exist`})
+                next({name: err.name, message: `email already exist`})
             } else {
                 next({name: "500", message: err.message})
             }
