@@ -111,7 +111,7 @@ class UserController {
             }
         })
         .then((googleRegisteredUser) => {
-            const token = sign({
+            const token = signJwt({
                 id: googleRegisteredUser.id,
                 name: googleRegisteredUser.name,
                 email: googleRegisteredUser.email
@@ -121,6 +121,7 @@ class UserController {
         .catch((err) => {
             next({message: err.message})
         })
+        console.log(name, email, "<<<<<<<<<<<<<<<")
     }
 }
 

@@ -78,10 +78,9 @@ class TaskController {
 
     static getEditPage(req, res, next) {
         Task.findByPk(+req.params.id)
-        .then((foundTodo) => {
-            console.log(foundTodo, "FOUND")
-            if (foundTodo) {
-                res.status(200).json(foundTodo)
+        .then((foundTask) => {
+            if (foundTask) {
+                res.status(200).json(foundTask)
             } else {
                 next({name: "task not found"})
             }

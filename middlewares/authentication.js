@@ -13,6 +13,7 @@ function authenticate(req, res, next) {
             }
         })
         .then((currentUser) => {
+            
             if (currentUser) {
                 req.loggedUser = {
                     id: currentUser.id,
