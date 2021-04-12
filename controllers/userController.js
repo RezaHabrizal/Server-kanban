@@ -86,6 +86,7 @@ class UserController {
             email = payload.email
             name = payload.name
             avatar = payload.picture
+            console.log(email, name, avatar, "GOOGLE LOGIN")
             return User.findOne({
                 where: {
                     email,
@@ -110,18 +111,17 @@ class UserController {
                 })
             }
         })
-        .then((googleRegisteredUser) => {
-            const token = signJwt({
-                id: googleRegisteredUser.id,
-                name: googleRegisteredUser.name,
-                email: googleRegisteredUser.email
+        .then((newGoogleRegisteredUser) => {
+            const access_token = signJwt({
+                id: newGoogleRegisteredUser.id,
+                name: newGoogleRegisteredUser.name,
+                email: newGoogleRegisteredUser.email
             })
-            res.status(201).json({token, name: googleRegisteredUser.name, avatar})
+            res.status(201).json({access_token, name: newGoogleRegisteredUser.name, avatar})
         })
         .catch((err) => {
             next({message: err.message})
         })
-        console.log(name, email, "<<<<<<<<<<<<<<<")
     }
 }
 
